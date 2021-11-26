@@ -14,6 +14,6 @@ router.get('/binance', exchange_controller_1.default.binance);
 router.get('/gate', exchange_controller_1.default.gate);
 // User COntrollers
 router.get('/login', user_controller_1.default.login);
-router.post('register', user_controller_1.default.register);
+router.post('/register', user_controller_1.default.register);
 module.exports = router;
 //# sourceMappingURL=routes.js.map

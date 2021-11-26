@@ -12,17 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
 const config_1 = __importDefault(require("../config"));
-const getExchangeData = (source) => __awaiter(void 0, void 0, void 0, function* () {
-    const url = config_1.default[source].api;
-    console.log(url);
-    // try {
-    //     const resp = await axios.get(url);
-    //     console.log(resp.data);
-    // } catch (err) {
-    //     // Handle Error Here
-    //     console.error(err);
-    // }
+const getExchangeBinanceData = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield axios_1.default.get(config_1.default.binance.api);
+        return JSON.stringify(result.data);
+    }
+    catch (err) {
+        throw new Error(err);
+    }
 });
-exports.default = { getExchangeData };
+const getExchangeGateData = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield axios_1.default.get(config_1.default.gate.api);
+        return JSON.stringify(result.data);
+    }
+    catch (err) {
+        throw new Error(err);
+    }
+});
+exports.default = { getExchangeBinanceData, getExchangeGateData };
 //# sourceMappingURL=exchange-service.js.map

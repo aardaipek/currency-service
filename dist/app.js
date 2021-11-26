@@ -10,6 +10,6 @@ const port = 3000;
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
-app.use('/', routes_1.default);
+app.use('/api', routes_1.default);
 app.listen(port, () => "server running on :" + port);
 //# sourceMappingURL=app.js.map

@@ -7,10 +7,10 @@ const router = express.Router();
 // App Controllers
 router.get('/healthcheck', appController.healthCheck);
 // Exchange Controllers
-router.get('/binance',exchangeController.binance);
-router.get('/gate',exchangeController.gate);
+router.get('/binance/getAll',exchangeController.binance);
+router.get('/gate/getAll',exchangeController.gate);
 // User COntrollers
 router.get('/login',userController.login);
-router.post('register',userController.register);
+router.post('/register',userController.register);
 
 export = router;
