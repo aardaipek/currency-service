@@ -10,4 +10,4 @@ app.use(bodyParser.json());
 
 app.use('/api', routes);
 
-app.listen(port, () => "server running on :"+port);
+app.listen(port, () => console.log("server running on :"+port));

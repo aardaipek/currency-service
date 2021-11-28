@@ -10,8 +10,8 @@ const router = express_1.default.Router();
 // App Controllers
 router.get('/healthcheck', app_controller_1.default.healthCheck);
 // Exchange Controllers
-router.get('/binance', exchange_controller_1.default.binance);
-router.get('/gate', exchange_controller_1.default.gate);
+router.get('/binance/getAll', exchange_controller_1.default.binance);
+router.get('/gate/getAll', exchange_controller_1.default.gate);
 // User COntrollers
 router.get('/login', user_controller_1.default.login);
 router.post('/register', user_controller_1.default.register);
