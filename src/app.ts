@@ -23,7 +23,7 @@ app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => res.send('Working!!!'));
+app.get('/', (req, res) => res.redirect('/swagger'));
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api', routes);

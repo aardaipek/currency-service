@@ -21,7 +21,7 @@ app.use((0, cors_1.default)({
 app.options('*', (0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
-app.get('/', (req, res) => res.send('Working!!!'));
+app.get('/', (req, res) => res.redirect('/swagger'));
 app.use('/swagger', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 app.use('/api', routes_1.default);
 app.listen(PORT, () => console.log("server running on :" + PORT));
