@@ -1,8 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes/routes';
-const port = 3000;
-
+const PORT = process.env.PORT || 4200;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,4 +9,4 @@ app.use(bodyParser.json());
 
 app.use('/api', routes);
 
-app.listen(port, () => console.log("server running on :"+port));
+app.listen(PORT, () => console.log("server running on :"+PORT));

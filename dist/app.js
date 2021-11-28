@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const routes_1 = __importDefault(require("./routes/routes"));
-const port = 3000;
+const PORT = process.env.PORT || 4200;
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 app.use('/api', routes_1.default);
-app.listen(port, () => console.log("server running on :" + port));
+app.listen(PORT, () => console.log("server running on :" + PORT));
 //# sourceMappingURL=app.js.map
