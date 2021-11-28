@@ -14,12 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const exchange_service_1 = __importDefault(require("../services/exchange-service"));
 const binance = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield exchange_service_1.default.getExchangeBinanceData();
-    res.status(200).send(result);
+    try {
+        const result = yield exchange_service_1.default.getExchangeBinanceData();
+        res.status(200).send(result);
+    }
+    catch (err) {
+        res.status(400).send(err);
+    }
 });
 const gate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield exchange_service_1.default.getExchangeGateData();
-    res.status(200).send(result);
+    try {
+        const result = yield exchange_service_1.default.getExchangeGateData();
+        res.status(200).send(result);
+    }
+    catch (err) {
+        res.status(400).send(err);
+    }
 });
 exports.default = { binance, gate };
 //# sourceMappingURL=exchange-controller.js.map

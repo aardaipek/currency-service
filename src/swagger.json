@@ -1,0 +1,53 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Currency Service",
+      "description": "A minimal and easy to follow example of what you need to create a CRUD style API in NodeJs",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "tags": [
+      {
+        "name": "Currency Service",
+        "description": "API for developer in the Currency Service"
+      }
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/api/binance/getAll": {
+        "get": {
+          "tags": [
+            "Binance"
+          ],
+          "summary": "Get all currency in binance",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      },
+      "/api/gate/getAll": {
+        "get": {
+          "tags": [
+            "Gate"
+          ],
+          "summary": "Get all currency in gate.io",
+          "responses": {
+            "200": {
+              "description": "OK"
+              
+            }
+          }
+        }
+      }
+    }
+  }
