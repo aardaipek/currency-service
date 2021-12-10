@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './routes/routes';
 import swaggerUi from 'swagger-ui-express';
 import cors from 'cors';
+import {router} from './routes/routes';
 
 const PORT = process.env.PORT || 4200;
 
@@ -23,9 +23,10 @@ app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Redirect
 app.get('/', (req, res) => res.redirect('/swagger'));
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api', routes);
+app.use(router);
 
 app.listen(PORT, () => console.log("server running on :"+PORT));

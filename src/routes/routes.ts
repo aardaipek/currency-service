@@ -1,16 +1,14 @@
-import express from 'express';
+import {Router} from 'express';
 import appController from '../controllers/app-controller';
-import exchangeController from '../controllers/exchange-controller';
-import userController from '../controllers/user-controller';
+import { binanceRouter } from './binanceRoutes';
+import { gateRouter } from './gateRoute';
+import { userRouter } from './userRoutes';
 
-const router = express.Router();
-// App Controllers
+export const router = Router();
 router.get('/healthcheck', appController.healthCheck);
-// Exchange Controllers
-router.get('/binance/getAll',exchangeController.binance);
-router.get('/gate/getAll',exchangeController.gate);
-// User COntrollers
-router.get('/login',userController.login);
-router.post('/register',userController.register);
+// Exchanges
+router.use('/api/binance',binanceRouter);
+router.use('/api/gate',gateRouter);
+// User
+router.use('/api/user',userRouter);
 
-export = router;
