@@ -12,17 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAll = void 0;
+exports.BinanceService = void 0;
 const axios_1 = __importDefault(require("axios"));
 const config_1 = __importDefault(require("../config"));
-const getAll = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield axios_1.default.get(config_1.default.binance.api);
-        return JSON.stringify(result.data);
+class BinanceService {
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield axios_1.default.get(config_1.default.binance.api);
+                return JSON.stringify(result.data);
+            }
+            catch (err) {
+                throw new Error(err);
+            }
+        });
     }
-    catch (err) {
-        throw new Error(err);
-    }
-});
-exports.getAll = getAll;
+}
+exports.BinanceService = BinanceService;
 //# sourceMappingURL=binance-service.js.map

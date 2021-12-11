@@ -1,5 +1,6 @@
 import {Router} from 'express';
-import * as gateController from '../controllers/exchanges/gate-controller';
+import {GateController} from '../controllers/exchanges/gate-controller';
 export const gateRouter = Router();
 
-gateRouter.get('/getAll',gateController.getAll);
+const controller = new GateController();
+gateRouter.get('/getAll',controller.getAll);

@@ -7,6 +7,7 @@ exports.router = void 0;
 const express_1 = require("express");
 const app_controller_1 = __importDefault(require("../controllers/app-controller"));
 const binanceRoutes_1 = require("./binanceRoutes");
+const currencyRoutes_1 = require("./currencyRoutes");
 const gateRoute_1 = require("./gateRoute");
 const userRoutes_1 = require("./userRoutes");
 exports.router = (0, express_1.Router)();
@@ -16,4 +17,6 @@ exports.router.use('/api/binance', binanceRoutes_1.binanceRouter);
 exports.router.use('/api/gate', gateRoute_1.gateRouter);
 // User
 exports.router.use('/api/user', userRoutes_1.userRouter);
+// Currency
+exports.router.use('/api/currency', currencyRoutes_1.currencyRouter);
 //# sourceMappingURL=routes.js.map
