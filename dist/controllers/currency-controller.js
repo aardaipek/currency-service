@@ -11,13 +11,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrencyController = void 0;
 const currency_service_1 = require("../services/currency-service");
+const errorCodes_1 = require("../objects/errorCodes");
+const result_1 = require("../objects/result");
 class CurrencyController {
     saveCurrency(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType) {
+                    res.status(404).send(errorCodes_1.ErrorCodes.MISSING_PARAMATERS);
+                }
                 const currencyService = new currency_service_1.CurrencyService();
                 const result = yield currencyService.saveCurrency();
-                res.status(200).send(result);
+                return res.status(200).json(new result_1.SuccessResult(result));
             }
             catch (err) {
                 res.status(400).send(err);

@@ -1,0 +1,5 @@
+export const ErrorCodes = {
+    MISSING_PARAMATERS: "MISSING_PARAMATERS",
+    MISSING_HEADERS: "MISSING_HEADERS",
+};
+  

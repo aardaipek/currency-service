@@ -10,12 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrencyService = void 0;
-const currency_1 = require("../models/currency");
 class CurrencyService {
     saveCurrency() {
         return __awaiter(this, void 0, void 0, function* () {
-            const currencyModel = new currency_1.Currency(455, 1, "ETH_USDT");
-            return currencyModel;
+            return "saved";
         });
     }
 }

@@ -3,4 +3,4 @@ import {CurrencyController} from '../controllers/currency-controller';
 export const currencyRouter = Router();
 
 const controller = new CurrencyController();
-currencyRouter.get('/save',controller.saveCurrency);
+currencyRouter.post('/save',controller.saveCurrency);
