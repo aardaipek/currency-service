@@ -30,10 +30,32 @@ class CurrencyService {
                 const currrencyRef = this.firestore
                     .collection(this.currencyCollection)
                     .doc(user)
-                    .collection(exchangeType.toString())
+                    .collection(exchangeType)
                     .doc(pair);
-                yield currrencyRef.set(data);
+                const result = yield currrencyRef.set(data);
                 return "saved";
+            }
+            catch (err) {
+                return err.message;
+            }
+        });
+    }
+    getUserCurrencies(username, exchangeType) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                exchangeType = exchangeType == 1 ? enums_1.ExchangeType.Binance : enums_1.ExchangeType.Gate;
+                let currencies = [];
+                yield this.firestore
+                    .collection(this.currencyCollection)
+                    .doc(username)
+                    .collection(exchangeType)
+                    .get()
+                    .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        currencies.push(doc.data());
+                    });
+                });
+                return currencies;
             }
             catch (err) {
                 return err.message;

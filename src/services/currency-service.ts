@@ -16,12 +16,32 @@ export class CurrencyService {
       const currrencyRef = this.firestore
         .collection(this.currencyCollection)
         .doc(user)
-        .collection(exchangeType.toString())
+        .collection(exchangeType)
         .doc(pair);
-      await currrencyRef.set(data);
+      const result = await currrencyRef.set(data);
       return "saved";
     } catch (err) {
       return err.message;
+    }
+  }
+
+  async getUserCurrencies(username,exchangeType) {
+    try {
+      exchangeType = exchangeType == 1 ? ExchangeType.Binance : ExchangeType.Gate;
+      let currencies = [];
+      await this.firestore
+        .collection(this.currencyCollection)
+        .doc(username)
+        .collection(exchangeType)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            currencies.push(doc.data());
+          });
+        });
+      return currencies;
+    } catch (err) {
+      return err.message
     }
   }
 }
