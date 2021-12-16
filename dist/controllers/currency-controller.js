@@ -17,11 +17,11 @@ class CurrencyController {
     saveCurrency(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType) {
+                if (!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType || !req.body.user) {
                     res.status(404).send(errorCodes_1.ErrorCodes.MISSING_PARAMATERS);
                 }
                 const currencyService = new currency_service_1.CurrencyService();
-                const result = yield currencyService.saveCurrency();
+                const result = yield currencyService.saveCurrency(req.body);
                 return res.status(200).json(new result_1.SuccessResult(result));
             }
             catch (err) {
