@@ -4,7 +4,7 @@ import { SuccessResult,ErrorResult } from '../objects/result';
 
 export class CurrencyController{
     async saveCurrency(req,res){
-        if(!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType || !req.body.user){
+        if(!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType || !req.body.userUid){
             return ErrorCodes.MISSING_PARAMATERS;
         }
         const currencyService = new CurrencyService();
@@ -13,11 +13,11 @@ export class CurrencyController{
     };
 
     async getCustomerCurrencies(req,res){
-        if(!req.body || !req.body.exchangeType || !req.body.user){
+        if(!req.body || !req.body.exchangeType || !req.body.userUid){
             return ErrorCodes.MISSING_PARAMATERS;
         }
         const currencyService = new CurrencyService();
-        const result = await currencyService.getUserCurrencies(req.body.user,req.body.exchangeType);
+        const result = await currencyService.getUserCurrencies(req.body.userUid,req.body.exchangeType);
        res.status(200).json(new SuccessResult(result));
     };
 }

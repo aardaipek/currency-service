@@ -24,7 +24,7 @@ class CurrencyService {
     saveCurrency(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = data.user;
+                const user = data.userUid;
                 const pair = data.pair;
                 const exchangeType = data.exchangeType == 1 ? enums_1.ExchangeType.Binance : enums_1.ExchangeType.Gate;
                 const currrencyRef = this.firestore
@@ -40,14 +40,14 @@ class CurrencyService {
             }
         });
     }
-    getUserCurrencies(username, exchangeType) {
+    getUserCurrencies(uid, exchangeType) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 exchangeType = exchangeType == 1 ? enums_1.ExchangeType.Binance : enums_1.ExchangeType.Gate;
                 let currencies = [];
                 yield this.firestore
                     .collection(this.currencyCollection)
-                    .doc(username)
+                    .doc(uid)
                     .collection(exchangeType)
                     .get()
                     .then((querySnapshot) => {

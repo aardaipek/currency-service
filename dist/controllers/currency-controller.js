@@ -16,7 +16,7 @@ const result_1 = require("../objects/result");
 class CurrencyController {
     saveCurrency(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType || !req.body.user) {
+            if (!req.body || !req.body.amount || !req.body.price || !req.body.pair || !req.body.exchangeType || !req.body.userUid) {
                 return errorCodes_1.ErrorCodes.MISSING_PARAMATERS;
             }
             const currencyService = new currency_service_1.CurrencyService();
@@ -27,11 +27,11 @@ class CurrencyController {
     ;
     getCustomerCurrencies(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!req.body || !req.body.exchangeType || !req.body.user) {
+            if (!req.body || !req.body.exchangeType || !req.body.userUid) {
                 return errorCodes_1.ErrorCodes.MISSING_PARAMATERS;
             }
             const currencyService = new currency_service_1.CurrencyService();
-            const result = yield currencyService.getUserCurrencies(req.body.user, req.body.exchangeType);
+            const result = yield currencyService.getUserCurrencies(req.body.userUid, req.body.exchangeType);
             res.status(200).json(new result_1.SuccessResult(result));
         });
     }

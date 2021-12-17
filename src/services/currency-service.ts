@@ -9,7 +9,7 @@ export class CurrencyService {
 
   async saveCurrency(data) {
     try {
-      const user = data.user;
+      const user = data.userUid;
       const pair = data.pair;
       const exchangeType =
         data.exchangeType == 1 ? ExchangeType.Binance : ExchangeType.Gate;
@@ -25,13 +25,13 @@ export class CurrencyService {
     }
   }
 
-  async getUserCurrencies(username,exchangeType) {
+  async getUserCurrencies(uid,exchangeType) {
     try {
       exchangeType = exchangeType == 1 ? ExchangeType.Binance : ExchangeType.Gate;
       let currencies = [];
       await this.firestore
         .collection(this.currencyCollection)
-        .doc(username)
+        .doc(uid)
         .collection(exchangeType)
         .get()
         .then((querySnapshot) => {
