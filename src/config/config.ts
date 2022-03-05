@@ -12,7 +12,12 @@ const binance = {
 
 const collections = {
     currencyCollection: process.env.CURRENCY_COLLECTION
+};
+
+const redisConfig = {
+    redisPort :process.env.REDIS_PORT,
+    redisDefaultExpiration :5
 }
 
 
-export default { gate,binance,collections };
+export default { gate,binance,collections,redisConfig };

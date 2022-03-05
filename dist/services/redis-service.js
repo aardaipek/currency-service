@@ -12,33 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BinanceService = void 0;
-const axios_1 = __importDefault(require("axios"));
+exports.RedisService = void 0;
+const redis_1 = __importDefault(require("redis"));
 const config_1 = __importDefault(require("../config/config"));
-const redis_1 = require("redis");
-class BinanceService {
+class RedisService {
     constructor() {
-        this.redisClient = (0, redis_1.createClient)();
+        this.redisClient = redis_1.default.createClient(config_1.default.redisConfig.redisPort);
     }
-    getAll() {
+    saveCurrency(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield this.redisClient.on("error", (err) => console.log("Redis Client Error", err));
-                yield this.redisClient.connect();
-                const redisData = yield this.redisClient.get("binanceAll");
-                if (redisData) {
-                    return redisData;
-                }
-                const result = yield axios_1.default.get(config_1.default.binance.api);
-                const data = JSON.stringify(result.data);
-                yield this.redisClient.setEx("binanceAll", config_1.default.redisConfig.redisDefaultExpiration, data);
-                return data;
+                this.redisClient.on("error", (err) => {
+                    console.log(err);
+                });
             }
             catch (err) {
-                throw new Error(err);
             }
         });
     }
 }
-exports.BinanceService = BinanceService;
-//# sourceMappingURL=binance-service.js.map
+exports.RedisService = RedisService;
+//# sourceMappingURL=redis-service.js.map

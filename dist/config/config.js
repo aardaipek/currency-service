@@ -14,5 +14,9 @@ const binance = {
 const collections = {
     currencyCollection: process.env.CURRENCY_COLLECTION
 };
-exports.default = { gate, binance, collections };
+const redisConfig = {
+    redisPort: process.env.REDIS_PORT,
+    redisDefaultExpiration: 5
+};
+exports.default = { gate, binance, collections, redisConfig };
 //# sourceMappingURL=config.js.map
