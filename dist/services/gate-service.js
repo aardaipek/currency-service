@@ -15,12 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GateService = void 0;
 const axios_1 = __importDefault(require("axios"));
 const config_1 = __importDefault(require("../config/config"));
+const redis_service_1 = require("./redis-service");
 class GateService {
+    constructor() {
+        this.redisService = new redis_service_1.RedisService();
+    }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const redisData = yield this.redisService.get("gateAll");
+                if (redisData) {
+                    return redisData;
+                }
                 const result = yield axios_1.default.get(config_1.default.gate.api);
-                return JSON.stringify(result.data);
+                const data = JSON.stringify(result.data);
+                yield this.redisService.setEx("gateAll", data);
+                return data;
             }
             catch (err) {
                 throw new Error(err);
