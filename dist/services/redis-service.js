@@ -13,21 +13,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisService = void 0;
-const redis_1 = __importDefault(require("redis"));
 const config_1 = __importDefault(require("../config/config"));
+const redis_1 = require("redis");
 class RedisService {
     constructor() {
-        this.redisClient = redis_1.default.createClient(config_1.default.redisConfig.redisPort);
+        this.redisClient = (0, redis_1.createClient)();
     }
-    saveCurrency(data) {
+    get(key) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                this.redisClient.on("error", (err) => {
-                    console.log(err);
-                });
+                yield this.connect();
+                return yield this.redisClient.get(key);
             }
             catch (err) {
+                console.log(err);
             }
+        });
+    }
+    setEx(key, data, expiration = config_1.default.redisConfig.redisDefaultExpiration) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.redisClient.setEx(key, expiration, data);
+                return true;
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    }
+    connect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.redisClient.on("error", (err) => console.log("Redis Client Error", err));
+            yield this.redisClient.connect();
         });
     }
 }

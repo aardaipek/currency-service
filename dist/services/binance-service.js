@@ -15,23 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BinanceService = void 0;
 const axios_1 = __importDefault(require("axios"));
 const config_1 = __importDefault(require("../config/config"));
-const redis_1 = require("redis");
+const redis_service_1 = require("./redis-service");
 class BinanceService {
     constructor() {
-        this.redisClient = (0, redis_1.createClient)();
+        this.redisService = new redis_service_1.RedisService();
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield this.redisClient.on("error", (err) => console.log("Redis Client Error", err));
-                yield this.redisClient.connect();
-                const redisData = yield this.redisClient.get("binanceAll");
+                const redisData = yield this.redisService.get("binanceAll");
                 if (redisData) {
                     return redisData;
                 }
                 const result = yield axios_1.default.get(config_1.default.binance.api);
                 const data = JSON.stringify(result.data);
-                yield this.redisClient.setEx("binanceAll", config_1.default.redisConfig.redisDefaultExpiration, data);
+                yield this.redisService.setEx("binanceAll", data);
                 return data;
             }
             catch (err) {
